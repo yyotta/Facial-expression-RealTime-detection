@@ -1,0 +1,1 @@
+python predict.py --model Resnet18 --img_path ./images/demo02.jpg

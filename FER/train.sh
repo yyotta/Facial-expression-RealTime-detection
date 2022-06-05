@@ -1,0 +1,1 @@
+python train.py --model Resnet18 --bs 64 --nw 0 --lr 0.001 --epoch_total 200
