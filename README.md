@@ -21,7 +21,7 @@ Facial expression recognition based on Resnet18 and convolutional Autoencoder. A
 
 - Train FER model: `cd ./FER/; python train.py` or `bash train.sh`
 - Predict FER model: `python predict.py`or `bash predict.sh`
-- Test the detector : `cd ..; python detect.py`or `bash detect.py`
+- Test the detector : `cd ..; python detect.py`or `bash detect.sh`
 
 # Files and folders in this repo
 
