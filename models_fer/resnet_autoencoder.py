@@ -44,16 +44,25 @@ class AutoEncoder(nn.Module):
         )
         # decoder
         self.dec1 = nn.ConvTranspose2d(
-            in_channels=inplance // 16, out_channels=inplance//4, kernel_size=kernelsize_2, bias=False
+            in_channels=inplance // 16, out_channels=inplance// 4, kernel_size=kernelsize_2, bias=False
         )
         self.dec2 = nn.ConvTranspose2d(
             in_channels=inplance//4, out_channels=output_size, kernel_size=kernelsize_1, bias=False
         )
+        self.conv1x1 = nn.ConvTranspose2d(
+            in_channels=2*output_size, out_channels=output_size, kernel_size=1, stride=1, padding=0, bias=False
+        )
+        self.sigmoid = nn.Sigmoid()
     def forward(self, x):
+        orgin = x 
         x1 = F.relu(self.enc1(x))
         x1 = F.relu(self.enc2(x1))
         x1 = F.relu(self.dec1(x1))
         x1 = F.relu(self.dec2(x1))
+        
+        x1 = torch.cat([x1, orgin], dim=1)
+
+        x1 = self.conv1x1(x1)
 
         return x1
 
@@ -112,14 +121,14 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        out = F.relu(self.bn1(self.conv1(x)))  # out : [64, 64, 44, 44]
+        out = F.relu(self.bn1(self.conv1(x)))
 
         x1 =self.autoencoder1(out)
 
         out = self.layer1(x1)
         out = self.layer2(out)
         out = self.layer3(out)
-        out = self.layer4(out)  # out : [64, 512, 6, 6]
+        out = self.layer4(out)
 
         x1 = self.autoencoder2(out)
 
