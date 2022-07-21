@@ -17,6 +17,8 @@ Facial expression recognition based on Resnet18 and convolutional Autoencoder. A
 
 # Download dataset and Pretrained model
 
+[Download dataset](https://drive.google.com/file/d/1mX-QwSmCVE8LHVUGKUwHlHYdMfPg_2Pm/view?usp=sharing)
+
 # How to use it?
 
 - Train FER model: `cd ./FER/; python train.py` or `bash train.sh`
